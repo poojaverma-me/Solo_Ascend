@@ -77,3 +77,4 @@ src/
 *   **Backend Integration**: Move from `localStorage` to a database (Supabase/Firebase) for cross-device sync.
 *   **Social Features**: "Guilds" or "Parties" for group habit tracking.
 *   **Advanced Analytics**: More detailed graphs for attribute growth over time.
+
