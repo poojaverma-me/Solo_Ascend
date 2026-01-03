@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --color-obsidian: #020617;
+  --color-electric-purple: #8b5cf6;
+  --color-electric-purple-light: #a78bfa;
+  --color-emerald-neon: #10b981;
+  --color-emerald-neon-light: #34d399;
+  
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-grotesk: "Space Grotesk", sans-serif;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-main: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --card-border: rgba(226, 232, 240, 0.8);
+  }
+
+  .dark {
+    --bg-main: #020617;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --card-bg: rgba(15, 23, 42, 0.6);
+    --card-border: rgba(30, 41, 59, 0.5);
+  }
+
+  body {
+    @apply font-jakarta transition-colors duration-500 antialiased;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+  }
+
+  h1, h2, h3, h4, .futuristic-text {
+    @apply font-grotesk font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-xl border rounded-3xl transition-all duration-300;
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+  }
+  
+  .dark .glass-card {
+    @apply shadow-[0_8px_32px_rgba(0,0,0,0.4)];
+  }
+  
+  .light .glass-card {
+    @apply shadow-[0_8px_32px_rgba(31,38,135,0.07)];
+  }
+
+  .hover-glow:hover {
+    @apply border-electric-purple/50 shadow-[0_0_20px_rgba(139,92,246,0.15)];
+  }
+
+  .stat-card {
+    @apply backdrop-blur-xl border rounded-3xl transition-all duration-300 p-6 relative overflow-hidden;
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+  }
+
+  .btn-primary {
+    @apply bg-electric-purple hover:bg-electric-purple-light text-white font-bold py-3 px-8 rounded-2xl 
+           transition-all duration-300 shadow-[0_4px_12px_rgba(139,92,246,0.3)] 
+           hover:shadow-[0_8px_24px_rgba(139,92,246,0.4)] hover:-translate-y-0.5 active:scale-95;
+  }
+
+  .input-field {
+    @apply bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4 
+           focus:ring-2 focus:ring-electric-purple/20 focus:border-electric-purple outline-none transition-all;
+  }
+}
+
+/* Dynamic Background Gradients */
+.bg-mesh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: blur(100px);
+  opacity: 0.5;
+}
+
+.dark .bg-mesh {
+  background: radial-gradient(circle at 0% 0%, #1e1b4b 0%, transparent 50%),
+              radial-gradient(circle at 100% 100%, #1e1b4b 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, #020617 0%, transparent 100%);
+}
+
+.light .bg-mesh {
+  background: radial-gradient(circle at 0% 0%, #e0e7ff 0%, transparent 50%),
+              radial-gradient(circle at 100% 100%, #fef3c7 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, #f8fafc 0%, transparent 100%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-400/20 rounded-full hover:bg-slate-400/40 transition-colors;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-white/10 hover:bg-white/20;
+}
